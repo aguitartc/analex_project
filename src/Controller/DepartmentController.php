@@ -7,6 +7,7 @@ use App\Repository\DepartmentRepository;
 use App\Repository\PersonaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
@@ -36,8 +37,16 @@ EOF
     /**
      * @Route("/department/{id}", name="department_id")
      */
-    public function show(Environment $twig, Department $department, PersonaRepository $personaRepository ): Response
+    public function show(Request $request, Environment $twig, Department $department, PersonaRepository $personaRepository ): Response
     {
-        return new Response($twig->render('department/show.html.twig',['department'=> $department, 'persones' => $personaRepository->findby(['department'=> $department],['cognoms'=> 'ASC'])]));
+        $offset     = max(0, $request->query->getInt('offset',0));
+        $paginator  = $personaRepository->getPersonaPaginator($department,$offset);
+
+        return new Response($twig->render('department/show.html.twig',
+            ['department'=> $department,
+             'persones' => $paginator,
+             'previous'=> $offset - PersonaRepository::PAGINATOR_PER_PAGE,
+             'next'=> min(count($paginator), $offset + PersonaRepository::PAGINATOR_PER_PAGE)
+            ]));
     }
 }

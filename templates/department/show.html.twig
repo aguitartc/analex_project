@@ -11,10 +11,19 @@
     <div class="example-wrapper">
         <h2>{{ department.sigles  }} </h2>
         {% if persones|length > 0 %}
+            <div>Consten {{ persones|length }} persones.</div>
             {% for persona in persones %}
                 <p>{{ persona.getIdent() }}({{ persona.getTipusIdent() }})-{{ persona.getCognoms() }},{{ persona.nom }}</p>
             {% endfor %}
+
+            {% if previous > 0  %}
+                <a href="{{ path('department_id',{id: department.id, offset: previous}) }}"> Anterior</a>
+            {% endif %}
+            {% if next < persones|length  %}
+                <a href="{{ path('department_id',{id: department.id, offset: next}) }}">Següent</a>
+            {% endif %}
         {% else %}
+            <div>No consta cap persona al departament</div>
         {% endif %}
 
 
