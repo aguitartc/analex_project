@@ -39,6 +39,11 @@ class Department
      */
     private $persones;
 
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $nom_curt;
+
     public function __construct()
     {
         $this->persones = new ArrayCollection();
@@ -111,6 +116,18 @@ class Department
                 $persone->setDepartment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNomCurt(): ?string
+    {
+        return $this->nom_curt;
+    }
+
+    public function setNomCurt(?string $nom_curt): self
+    {
+        $this->nom_curt = $nom_curt;
 
         return $this;
     }
