@@ -9,12 +9,9 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/bin/apache/apache2.4.46/htdocs/analex_project/src/Controller/DepartmentController.php'|file_link(0) }}">src/Controller/DepartmentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/bin/apache/apache2.4.46/htdocs/analex_project/templates/department/index.html.twig'|file_link(0) }}">templates/department/index.html.twig</a></code></li>
-    </ul>
+    <h1>Departaments introduïts asshole</h1>
+    {% for department in departments %}
+        <p>{{ department.sigles }}-{{ department.nom }}</p>
+    {% endfor %}
 </div>
 {% endblock %}

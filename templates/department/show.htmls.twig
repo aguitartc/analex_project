@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{department.nom}}{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h2>{{ department.sigles  }} {{ department.codi_upc  }} </h2>
+        {% if persones|length > 0 %}
+            {% for persona in persones %}
+                <p>{{ persona.identificador }}({{ persona.tipus_identificador }})-{{ persona.cognoms }},{{ persona.nom }}</p>
+            {% endfor %}
+        {% else %}
+        {% endif %}
+
+
+    </div>
+{% endblock %}
