@@ -9,10 +9,10 @@
     </style>
 
     <div class="example-wrapper">
-        <h2>{{ department.sigles  }} {{ department.codi_upc  }} </h2>
+        <h2>{{ department.sigles  }} </h2>
         {% if persones|length > 0 %}
             {% for persona in persones %}
-                <p>{{ persona.identificador }}({{ persona.tipus_identificador }})-{{ persona.cognoms }},{{ persona.nom }}</p>
+                <p>{{ persona.getIdent() }}({{ persona.getTipusIdent() }})-{{ persona.getCognoms() }},{{ persona.nom }}</p>
             {% endfor %}
         {% else %}
         {% endif %}
