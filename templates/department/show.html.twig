@@ -15,8 +15,10 @@
             {% for persona in persones %}
                 <p>{{ persona.getIdent() }}({{ persona.getTipusIdent() }})-{{ persona.getCognoms() }},{{ persona.nom }}</p>
             {% endfor %}
+            previous :{{ previous }}<br>
+            next : {{ next }}<br>
+            {% if previous >= 0  %}
 
-            {% if previous > 0  %}
                 <a href="{{ path('department_id',{id: department.id, offset: previous}) }}"> Anterior</a>
             {% endif %}
             {% if next < persones|length  %}
