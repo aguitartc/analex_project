@@ -19,10 +19,10 @@
             next : {{ next }}<br>
             {% if previous >= 0  %}
 
-                <a href="{{ path('department_id',{id: department.id, offset: previous}) }}"> Anterior</a>
+                <a href="{{ path('department_slug',{slug: department.slug, offset: previous}) }}"> Anterior</a>
             {% endif %}
             {% if next < persones|length  %}
-                <a href="{{ path('department_id',{id: department.id, offset: next}) }}">Següent</a>
+                <a href="{{ path('department_slug',{slug: department.slug, offset: next}) }}">Següent</a>
             {% endif %}
         {% else %}
             <div>No consta cap persona al departament</div>

@@ -36,7 +36,7 @@ class DepartmentController extends AbstractController
     }
 
     /**
-     * @Route("/department/{id}", name="department_id")
+     * @Route("/department/{slug}", name="department_slug")
      */
     public function show(Request $request,Department $department, PersonaRepository $personaRepository, DepartmentRepository $departmentRepository ): Response
     {

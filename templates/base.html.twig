@@ -21,7 +21,7 @@
         <ul>
             {% for department in departments %}
                 <li>
-                    <a href=" {{ path('department_id',{ 'id':department.id}) }}">{{ department.nom }}</a>
+                    <a href=" {{ path('department_slug',{ 'slug':department.slug}) }}">{{ department.nom }}</a>
                 </li>
             {% endfor %}
         </ul>

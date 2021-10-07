@@ -11,7 +11,7 @@
 <div class="example-wrapper">
     <h1>Departaments introduïts asshole</h1>
     {% for department in departments %}
-        <p><a href="/department/{{department.id}}">{{ department.sigles }}-{{ department.nom }}</a> </p>
+        <p><a href="/department/{{department.slug}}">{{ department.sigles }}-{{ department.nom }}</a> </p>
     {% endfor %}
 </div>
 {% endblock %}
