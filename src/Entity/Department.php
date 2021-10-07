@@ -6,9 +6,12 @@ use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\DBAL\Schema\Constraint;
 
 /**
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
+ * @UniqueEntity("slug")
  */
 class Department
 {
@@ -43,6 +46,12 @@ class Department
      * @ORM\Column(type="string", length=200, nullable=true)
      */
     private $nom_curt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -128,6 +137,18 @@ class Department
     public function setNomCurt(?string $nom_curt): self
     {
         $this->nom_curt = $nom_curt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
