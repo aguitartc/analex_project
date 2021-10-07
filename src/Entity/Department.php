@@ -161,4 +161,8 @@ class Department
             $this->slug = (string) $slugger->slug((string) $this)->lower();
         }
     }
+    //s'afegeix per tal de poder-lo enumerar al formulari d'alta de persones
+    public function __toString() {
+        return $this->nom;
+    }
 }

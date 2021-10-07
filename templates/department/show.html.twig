@@ -27,8 +27,11 @@
         {% else %}
             <div>No consta cap persona al departament</div>
         {% endif %}
+        <h2>Afegir persona</h2>
 
-        <p><a href="/departments">Departaments</a> </p>
+        {{ form(persona_form) }}
+
+        <p><a href="/departments">Link primigeni a la llista de Departaments</a> </p>
 
 
     </div>
