@@ -7,6 +7,7 @@ use App\Entity\Department;
 use App\Form\PersonaFormType;
 use App\Repository\DepartmentRepository;
 use App\Repository\PersonaRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +17,12 @@ use Twig\Environment;
 class DepartmentController extends AbstractController
 {
     private $twig;
-    public function __construct(Environment $twig)
+    private $entityManager;
+
+    public function __construct(Environment $twig, EntityManagerInterface $entityManager)
     {
         $this->twig = $twig;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -44,6 +48,17 @@ class DepartmentController extends AbstractController
     {
         $persona = new Persona();
         $form = $this->createForm(PersonaFormType::class, $persona);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $persona->setDepartment($department);
+
+            $this->entityManager->persist($persona);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('department_slug',['slug'=> $department->getSlug()]);
+
+        }
 
         $offset     = max(0, $request->query->getInt('offset',0));
         $paginator  = $personaRepository->getPersonaPaginator($department,$offset);

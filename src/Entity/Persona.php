@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PersonaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PersonaRepository::class)
@@ -20,32 +21,38 @@ class Persona
 
     /**
      * @ORM\Column(type="string", length=5)
+     * @Assert\NotBlank
      */
     private $tipus_ident;
 
     /**
      * @ORM\Column(type="string", length=25)
+     * @Assert\NotBlank
      */
     private $ident;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $cognoms;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
      */
     private $data_alta;
 
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="persones")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
      */
     private $department;
 
