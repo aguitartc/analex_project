@@ -24,14 +24,7 @@ class DepartmentController extends AbstractController
      */
     public function index_prova(DepartmentRepository $departmentRepository): Response
     {
-        return new Response(<<<EOF
-                            <html lang="ca">
-                            <body>Holaaaa!!! 
-                                <p><a href="/departments">Departaments</a> </p>
-                            </body>
-                            </html>
-EOF
-                            );
+        return new Response($this->twig->render('base.html.twig',['departments'=> $departmentRepository->findAll()]));
     }
 
     /**
@@ -45,13 +38,14 @@ EOF
     /**
      * @Route("/department/{id}", name="department_id")
      */
-    public function show(Request $request,Department $department, PersonaRepository $personaRepository ): Response
+    public function show(Request $request,Department $department, PersonaRepository $personaRepository, DepartmentRepository $departmentRepository ): Response
     {
         $offset     = max(0, $request->query->getInt('offset',0));
         $paginator  = $personaRepository->getPersonaPaginator($department,$offset);
 
         return new Response($this->twig->render('department/show.html.twig',
                                             ['department'=> $department,
+                                             'departments'=> $departmentRepository->findAll(),
                                              'persones' => $paginator,
                                              'previous'=> $offset - PersonaRepository::PAGINATOR_PER_PAGE,
                                              'next'=> min(count($paginator), $offset + PersonaRepository::PAGINATOR_PER_PAGE)
