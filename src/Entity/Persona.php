@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PersonaRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Persona
 {
@@ -111,6 +112,13 @@ class Persona
         $this->data_alta = $data_alta;
 
         return $this;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDataAltaValue()
+    {
+        $this->data_alta = new \DateTime();
     }
 
     public function getDepartment(): ?Department
